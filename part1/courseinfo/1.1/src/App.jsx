@@ -1,14 +1,10 @@
 const Header = (props) => {
-  return (
-    <div>
-      <h1>{props.course}</h1>
-    </div>
-  );
+  return <h1>{props.course}</h1>;
 };
 
 const Content = (props) => {
   return (
-    <div>
+    <>
       <p>
         {props.name1} {props.quantity1}
       </p>
@@ -18,16 +14,12 @@ const Content = (props) => {
       <p>
         {props.name3} {props.quantity3}
       </p>
-    </div>
+    </>
   );
 };
 
 const Total = (props) => {
-  return (
-    <div>
-      <p>Number of exercises {props.sum}</p>
-    </div>
-  );
+  return <p>Number of exercises {props.sum}</p>;
 };
 
 const App = () => {
