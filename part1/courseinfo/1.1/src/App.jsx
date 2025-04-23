@@ -1,31 +1,31 @@
-const Header = (header) => {
+const Header = (props) => {
   return (
     <div>
-      <h1>{header.course}</h1>
+      <h1>{props.course}</h1>
     </div>
   );
 };
 
-const Content = (content) => {
+const Content = (props) => {
   return (
     <div>
       <p>
-        {content.name1} {content.quantity1}
+        {props.name1} {props.quantity1}
       </p>
       <p>
-        {content.name2} {content.quantity2}
+        {props.name2} {props.quantity2}
       </p>
       <p>
-        {content.name3} {content.quantity3}
+        {props.name3} {props.quantity3}
       </p>
     </div>
   );
 };
 
-const Total = (number) => {
+const Total = (props) => {
   return (
     <div>
-      <p>Number of exercises {number.sum}</p>
+      <p>Number of exercises {props.sum}</p>
     </div>
   );
 };
