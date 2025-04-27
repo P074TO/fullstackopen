@@ -6,9 +6,7 @@ const Button = ({ onClick, text }) => {
 
 const Feedback = () => <h1>give feedback</h1>;
 
-const Statistics = () => <h1>statistics</h1>;
-
-const StatisticsLn = ({ statistic, value }) => {
+const StatisticLn = ({ statistic, value }) => {
   return (
     <p>
       {statistic} {value}
@@ -37,6 +35,38 @@ const Positive = ({ text, value, check }) => {
     <p>
       {text} {value} {check}
     </p>
+  );
+};
+
+const Statistics = ({ good, neutral, bad, all, average, positive }) => {
+  return (
+    <div>
+      <h1>statistics</h1>
+      <StatisticLn
+        statistic={all != 0 ? "good" : ""}
+        value={all != 0 ? good : ""}
+      />
+      <StatisticLn
+        statistic={all != 0 ? "neutral" : ""}
+        value={all != 0 ? neutral : ""}
+      />
+      <StatisticLn
+        statistic={all != 0 ? "bad" : ""}
+        value={all != 0 ? bad : ""}
+      />
+      <All
+        text={all != 0 ? "all" : "no feedback given"}
+        value={all != 0 ? all : ""}
+      />
+      <Average
+        text={all != 0 ? "average" : ""}
+        value={all != 0 ? average : ""}
+      />
+      <Positive
+        text={all != 0 ? "positive" : ""}
+        value={all != 0 ? positive : ""}
+      />
+    </div>
   );
 };
 
@@ -88,31 +118,13 @@ const App = () => {
       <Button onClick={handleGood} text={"good"} />
       <Button onClick={handleNeutral} text={"neutral"} />
       <Button onClick={handleBad} text={"bad"} />
-      <Statistics />
-      <StatisticsLn
-        statistic={all != 0 ? "good" : ""}
-        value={all != 0 ? good : ""}
-      />
-      <StatisticsLn
-        statistic={all != 0 ? "neutral" : ""}
-        value={all != 0 ? neutral : ""}
-      />
-      <StatisticsLn
-        statistic={all != 0 ? "bad" : ""}
-        value={all != 0 ? bad : ""}
-      />
-      <All
-        text={all != 0 ? "all" : "no feedback given"}
-        value={all != 0 ? all : ""}
-      />
-      <Average
-        text={all != 0 ? "average" : ""}
-        value={all != 0 ? average : ""}
-      />
-      <Positive
-        text={all != 0 ? "positive" : ""}
-        value={all != 0 ? positive : ""}
-        check={all != 0 ? "%" : ""}
+      <Statistics
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        all={all}
+        average={average}
+        positive={positive}
       />
     </div>
   );
