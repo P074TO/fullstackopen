@@ -77,8 +77,8 @@ const App = () => {
   const [bad, setBad] = useState(0);
   const [all, setAll] = useState(0);
   const [score, setScore] = useState(0);
-  var average = score / all;
-  var positive = (good / all) * 100;
+  let average = score / all;
+  let positive = (good / all) * 100;
 
   const handleGood = () => {
     const updatedGood = good + 1;
