@@ -1,18 +1,12 @@
-const Header = ({ header }) => {
-  return <h1>{header}</h1>;
-};
+const Header = ({ header }) => <h1>{header}</h1>;
 
-const Part = ({ part }) => {
-  return (
-    <p>
-      {part.name} {part.exercises}
-    </p>
-  );
-};
+const Part = ({ part }) => (
+  <p>
+    {part.name} {part.exercises}
+  </p>
+);
 
-const Total = ({ sum }) => {
-  return <b>total of {sum} exercises</b>;
-};
+const Total = ({ sum }) => <b>total of {sum} exercises</b>;
 
 const Course = ({ course }) => {
   const sum = course.parts.reduce((sum, part) => sum + part.exercises, 0);

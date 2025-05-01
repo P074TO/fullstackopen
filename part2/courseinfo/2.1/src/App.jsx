@@ -1,3 +1,7 @@
+const Header = ({ header }) => {
+  return <h1>{header.name}</h1>;
+};
+
 const Part = ({ part }) => {
   return (
     <p>
@@ -6,14 +10,19 @@ const Part = ({ part }) => {
   );
 };
 
+const Total = ({ sum }) => {
+  return <b>total of {sum} exercises</b>;
+};
+
 const Course = ({ course }) => {
-  console.log(course.parts);
+  const sum = course.parts.reduce((sum, part) => sum + part.exercises, 0);
   return (
     <>
-      {course.parts.map((part) => {
-        console.log(part.name);
-        return <Part key={part.id} part={part} />;
-      })}
+      <Header header={course} />
+      {course.parts.map((part) => (
+        <Part key={part.id} part={part} />
+      ))}
+      <Total sum={sum} />
     </>
   );
 };
@@ -43,7 +52,6 @@ const App = () => {
 
   return (
     <div>
-      <h1>{course.name}</h1>
       <Course course={course} />
     </div>
   );
