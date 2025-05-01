@@ -1,3 +1,6 @@
+import Header from "./Header.jsx";
+import Course from "./Course.jsx";
+
 const Courses = ({ courses }) => {
   return (
     <>

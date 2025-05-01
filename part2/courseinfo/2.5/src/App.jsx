@@ -1,7 +1,3 @@
-import Header from "./components/Header.jsx";
-import Part from "./components/Part.jsx";
-import Total from "./components/Total.jsx";
-import Course from "./components/Course.jsx";
 import Courses from "./components/Courses.jsx";
 
 const App = () => {
