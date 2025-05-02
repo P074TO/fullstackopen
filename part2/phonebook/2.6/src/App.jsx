@@ -6,21 +6,20 @@ const App = () => {
   const [newName, setNewName] = useState("");
 
   const addPerson = (event) => {
+    const nameExists = persons.some((person) => person.name === newName);
     event.preventDefault();
     console.log("button clicked", event.target);
-    const nameObject = {
-      name: newName,
-      id: String(persons.length + 1),
-    };
 
-    console.log(nameObject);
-    console.log(persons);
+    if (nameExists) {
+      window.alert(`${newName} is already added to phonebook`);
+    } else {
+      const nameObject = {
+        name: newName,
+        id: String(persons.length + 1),
+      };
+      setPersons(persons.concat(nameObject));
+    }
 
-    persons.filter((person) => {
-      person.name === nameObject.name
-        ? window.alert(`${newName} is already added to phonebook`)
-        : setPersons(persons.concat(nameObject));
-    });
     setNewName("");
   };
 
