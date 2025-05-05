@@ -2,18 +2,21 @@ import { useState } from "react";
 import Persons from "./components/Persons.jsx";
 
 const ToShow = ({ persons, find }) => {
-  const match = persons.map(
-    (person) => (person.name === find || person.number === find) && find != "",
-  );
+  const match = find
+    ? persons.filter(
+        (person) =>
+          person.name.toLowerCase().includes(find.toLowerCase()) ||
+          person.number.includes(find),
+      )
+    : persons;
 
-  if (match) {
-    persons.filter((person) => <Persons key={person.id} persons={person} />);
-  } else {
-    persons.map((person) => {
-      console.log(person);
-      return <Persons key={person.id} persons={person} />;
-    });
-  }
+  return (
+    <div>
+      {match.map((person) => (
+        <Persons key={person.id} persons={person} />
+      ))}
+    </div>
+  );
 };
 
 const App = () => {
