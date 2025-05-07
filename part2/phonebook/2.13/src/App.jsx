@@ -13,7 +13,7 @@ const App = () => {
     personService.getAll().then((response) => {
       setPersons(response.data);
     });
-  });
+  }, []);
 
   const addPerson = (event) => {
     const nameExists = persons.some((person) => person.name === newName);
