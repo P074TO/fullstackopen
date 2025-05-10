@@ -45,6 +45,17 @@ const App = () => {
     setNewNumber("");
   };
 
+  const deletePerson = (id) => {
+    personService
+      .remove(id)
+      .then(() => {
+        setPersons(persons.filter(person => person.id !== id));
+      })
+      .catch((error) => {
+        console.error("Delete failed:", error);
+      });
+  };
+
   const handleChange = (event, setState) => setState(event.target.value);
 
   return (
@@ -75,7 +86,7 @@ const App = () => {
         </div>
       </form>
       <h3>Numbers</h3>
-      <Filter persons={persons} find={find} />
+      <Filter persons={persons} find={find} handler={deletePerson}/>
     </div>
   );
 };

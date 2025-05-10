@@ -1,6 +1,6 @@
 import Persons from "./Persons.jsx";
 
-const Filter = ({ persons, find }) => {
+const Filter = ({ persons, find, handler }) => {
   const match = find
     ? persons.filter(
         (person) =>
@@ -12,7 +12,7 @@ const Filter = ({ persons, find }) => {
   return (
     <div>
       {match.map((person) => (
-        <Persons key={person.id} persons={person} />
+        <Persons key={person.id} persons={person} handler={handler}/>
       ))}
     </div>
   );
