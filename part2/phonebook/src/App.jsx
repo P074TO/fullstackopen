@@ -21,21 +21,24 @@ const App = () => {
     const personObject = {
       name: newName,
       number: newNumber,
-      id: String(persons.length + 1),
     };
 
     if (!newName || !newNumber) {
       alert(`Missing information`);
-    }
-
-    if (
+    } else if (
       persons.some(
         (person) => person.name.toLowerCase() === newName.toLowerCase(),
       )
     ) {
       alert(`${newName} is already added to phonebook`);
     } else {
-      setPersons(persons.concat(personObject));
+      axios
+        .post("http://localhost:3001/persons", personObject)
+        .then((response) => {
+          setPersons(persons.concat(response.data));
+          setNewName("");
+          setNewNumber("");
+        });
     }
 
     setNewName("");
