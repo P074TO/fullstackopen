@@ -21,12 +21,20 @@ const App = () => {
       id: String(persons.length + 1),
     };
 
-    setPersons(persons.concat(personObject));
+    if (
+      persons.some(
+        (person) => person.name.toLowerCase() === newName.toLowerCase(),
+      )
+    ) {
+      alert(`${newName} is already added to phonebook`);
+    } else {
+      setPersons(persons.concat(personObject));
+    }
+
     setNewName("");
   };
 
   const handleNameChange = (event) => {
-    console.log(event.target.value);
     setNewName(event.target.value);
   };
 
