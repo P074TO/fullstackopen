@@ -43,6 +43,12 @@ const App = () => {
     setNewNumber("");
   };
 
+  const removePerson = (id) => {
+    personService.remove(id).then(() => {
+      setPersons(persons.filter((person) => person.id !== id));
+    });
+  };
+
   const handler = (setter) => (event) => setter(event.target.value);
 
   const filtered = persons.filter((person) =>
@@ -67,7 +73,7 @@ const App = () => {
 
       <h3>Numbers</h3>
 
-      <Persons persons={filtered} />
+      <Persons persons={filtered} deleteHandler={removePerson} />
     </div>
   );
 };
