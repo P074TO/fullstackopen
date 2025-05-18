@@ -1,4 +1,17 @@
-import express, { RequestHandler } from "express";
+import express, { Request, RequestHandler } from "express";
+import morgan from "morgan";
+
+const app = express();
+
+morgan.token("body", (req) => {
+  const request = req as Request;
+  return JSON.stringify(request.body);
+});
+
+app.use(express.json());
+app.use(
+  morgan(":method :url :status :res[content-length] - :response-time ms :body"),
+);
 
 interface Person {
   id: string;
@@ -40,26 +53,26 @@ const postPersonHandler: RequestHandler<{}, {}, Person> = (
   response,
 ) => {
   const body = request.body;
+  const exists = persons.find((person) => person.name === body.name);
 
   if (!body.name || !body.number) {
     response.status(400).json({ error: "Information missing" });
     return;
+  } else if (exists) {
+    response.status(400).json({ error: "Name must be unique" });
+    return;
+  } else {
+    const person: Person = {
+      id: generateId(),
+      name: body.name,
+      number: body.number,
+    };
+
+    persons = persons.concat(person);
+
+    response.json(person);
   }
-
-  const person: Person = {
-    id: generateId(),
-    name: body.name,
-    number: body.number,
-  };
-
-  persons = persons.concat(person);
-
-  response.json(person);
 };
-
-const app = express();
-
-app.use(express.json());
 
 app.get("/", (request, response) => {
   response.send("<h1>Hello World!</h1>");
@@ -78,6 +91,11 @@ app.get("/api/persons/:id", (request, response) => {
   } else {
     response.status(404).end();
   }
+});
+
+app.get("/info", (request, response) => {
+  response.send(`<p>Phonebook has info for ${persons.length} people</p>
+<p>${Date()}</p>`);
 });
 
 app.post("/api/persons", postPersonHandler);
